@@ -2,10 +2,12 @@
 <#import "/spring.ftl" as spring/>
 <@layout.myLayout>
 
-<div class="p-5 mb-4 bg-body-tertiary rounded-3">
-<div class="container-fluid py-5">
-  project jaehyeon2
-</div>
+<div>
+
+	<form>
+		<input type="text"/>
+	</form>
+
 </div>
 
 </@layout.myLayout>
