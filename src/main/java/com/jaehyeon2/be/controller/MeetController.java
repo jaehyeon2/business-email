@@ -12,8 +12,6 @@ public class MeetController {
 	
 	@RequestMapping(value = {"/", "", "/index"}, method = RequestMethod.GET)
 	public String index(MeetParam meetParam) throws Exception {
-		
-		
 		return "/apps/meet/index";
 	}
 
