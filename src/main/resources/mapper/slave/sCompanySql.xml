@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jaehyeon2.be.dao.slave.SCompanyDao">
+
+	<!-- 단건 조회 -->
+	<select id="sltCompany" resultType="com.jaehyeon2.be.beans.model.CompanyModel">
+		SELECT
+			company_no,
+			company_name,
+			company_info,
+			company_meet,
+			company_status,
+			company_delete,
+			insert_time,
+			update_time
+		FROM 
+			company
+		WHERE 
+			company_no = #{companyNo}
+			AND company_delete = '0'
+	</select>
+	
+	<!-- 목록 조회 -->
+	<select id="sltCompanyList" resultType="com.jaehyeon2.be.beans.model.CompanyModel">
+		SELECT
+			company_no,
+			company_name,
+			company_info,
+			company_meet,
+			company_status,
+			company_delete,
+			insert_time,
+			update_time
+		FROM 
+			company
+		WHERE 
+			<if test="companyName != null and companyName != ''">
+			company_name LIKE CONCAT('%', #{companyName}, '%') AND
+			</if>
+			company_delete = '0'
+	</select>
+	
+	<select id="sltCompanyCount" resultType="int">
+		SELECT
+			COUNT(*) 
+		FROM 
+			company
+		WHERE 
+			<if test="companyName != null and companyName != ''">
+			company_name LIKE CONCAT('%', #{companyName}, '%') AND
+			</if>
+			company_delete = '0'
+	</select>
+	
+	
+
+</mapper>
