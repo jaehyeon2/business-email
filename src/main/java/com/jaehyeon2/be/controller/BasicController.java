@@ -7,15 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class IndexController {
+public class BasicController {
 
-	final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @RequestMapping(value={"/", "", "/index"}, method=RequestMethod.GET)
-	public String index() throws Exception {
-    	
-    	
-		return "index";
-	}
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	protected String MODEL = "model";
 
 }

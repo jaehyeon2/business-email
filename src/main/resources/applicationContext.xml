@@ -18,8 +18,15 @@
 	<context:component-scan base-package="com.jaehyeon2.be" />
 
 	<!-- Include the core spring -->
+	<import resource="classpath:spring/common.xml"/>
+	<import resource="classpath:spring/exception.xml"/>
+	<import resource="classpath:spring/sessiondb.xml"/>
+	<import resource="classpath:spring/mariadb.xml"/>
+	<import resource="classpath:spring/service.xml"/>
+	<import resource="classpath:spring/dao.xml"/>
 	
-	<!-- Users -->
-	
+	<!-- api setting -->
+	<import resource="classpath:spring/openAI.xml"/>
+	<import resource="classpath:spring/prompt.xml"/>
 
 </beans>

@@ -8,21 +8,25 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-
-	<bean id="HEAD_PROMPT" class="java.lang.String" scope="singleton">
-		<constructor-arg value="${prompt.head}"/>
+	
+	<bean id="API_PROMPT_INFO_SETTING" class="java.lang.String" scope="singleton">
+		<constructor-arg value="${prompt.info.setting}"/>
 	</bean>
 	
-	<bean id="BODY_PROMPT_TITLE" class="java.lang.String" scope="singleton">
-		<constructor-arg value="${prompt.body.title}"/>
+	<bean id="API_PROMPT_INFO_CONTENT" class="java.lang.String" scope="singleton">
+		<constructor-arg value="${prompt.info.content}"/>
 	</bean>
 	
-	<bean id="BODY_PROMPT_CONTENT" class="java.lang.String" scope="singleton">
-		<constructor-arg value="${prompt.body.content}"/>
+	<bean id="API_PROMPT_EMAIL_SETTING" class="java.lang.String" scope="singleton">
+		<constructor-arg value="${prompt.email.setting}"/>
 	</bean>
 	
-	<bean id="TAIL_PROMPT" class="java.lang.String" scope="singleton">
-		<constructor-arg value="${prompt.tail}"/>
+	<bean id="API_PROMPT_EMAIL_CONTENT" class="java.lang.String" scope="singleton">
+		<constructor-arg value="${prompt.email.content}"/>
+	</bean>
+		
+	<bean id="API_PROMPT_EMAIL_INFO" class="java.lang.String" scope="singleton">
+		<constructor-arg value="${prompt.email.info}"/>
 	</bean>
 
 </beans>

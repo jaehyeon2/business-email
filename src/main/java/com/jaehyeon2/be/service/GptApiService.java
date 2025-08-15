@@ -1,7 +1,7 @@
 package com.jaehyeon2.be.service;
 
-import com.jaehyeon2.be.beans.param.MeetParam;
+import com.jaehyeon2.be.beans.param.CompanyParam;
 
 public interface GptApiService {
-	public String getGPTResponse(MeetParam meetParam) throws Exception;
+	public String getGPTResponse(CompanyParam companyParam) throws Exception;
 }

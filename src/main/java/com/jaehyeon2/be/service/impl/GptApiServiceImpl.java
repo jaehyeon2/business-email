@@ -14,7 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jaehyeon2.be.beans.param.MeetParam;
+import com.jaehyeon2.be.beans.enums.APIType;
+import com.jaehyeon2.be.beans.param.CompanyParam;
 import com.jaehyeon2.be.service.GptApiService;
 
 @Service
@@ -32,21 +33,48 @@ public class GptApiServiceImpl implements GptApiService{
 	private String OPENAI_API_GPT_MODEL;
 	
 	@Autowired
-	private String HEAD_PROMPT;
+	private String API_PROMPT_INFO_SETTING;
 	
 	@Autowired
-	private String BODY_PROMPT_TITLE;
+	private String API_PROMPT_INFO_CONTENT;
 	
 	@Autowired
-	private String BODY_PROMPT_CONTENT;
+	private String API_PROMPT_EMAIL_SETTING;
 	
 	@Autowired
-	private String TAIL_PROMPT;
+	private String API_PROMPT_EMAIL_CONTENT;
+	
+	@Autowired
+	private String API_PROMPT_EMAIL_INFO;
+	
+	private String createRequestBody(String prompt) {
+    	
+        JSONObject json = new JSONObject();
+        json.put("model", OPENAI_API_GPT_MODEL);
+
+        JSONArray messages = new JSONArray();
+        JSONObject message = new JSONObject();
+        message.put("role", "user");
+        message.put("content", prompt);
+        messages.put(message);
+
+        json.put("messages", messages);
+
+        return json.toString();
+    }
+
+    //responseBody에서 gptAnswer 추출
+    private String parseResponse(String responseBody) {
+        JSONObject json = new JSONObject(responseBody);
+        JSONArray choices = json.getJSONArray("choices");
+        JSONObject message = choices.getJSONObject(0).getJSONObject("message");
+        return message.getString("content");
+    }
 	
 	@Override
-	public String getGPTResponse(MeetParam meetParam) throws Exception {
+	public String getGPTResponse(CompanyParam companyParam) throws Exception {
         
-		String fullPrompt = this.makePrompt(meetParam);
+		String fullPrompt = this.makePrompt(companyParam);
 		
         String requestBody = createRequestBody(fullPrompt);
 
@@ -82,41 +110,31 @@ public class GptApiServiceImpl implements GptApiService{
         return gptAnswer;
     }
 	
-	private String makePrompt(MeetParam meetParam){
+	private String makePrompt(CompanyParam companyParam){
 		
-		String fullPrompt = new StringBuilder()
-				.append(HEAD_PROMPT)
-				.append(BODY_PROMPT_TITLE)
-//				.append(newsParam.getMnTitle())
-				.append(BODY_PROMPT_CONTENT)
-//				.append(newsParam.getMnContent())
-				.append(TAIL_PROMPT)
-				.toString();
+		String fullPrompt = null;
+		
+		if (companyParam.getAPIType().equals(APIType.INFO)) {
+			
+			fullPrompt = new StringBuilder()
+					.append(API_PROMPT_INFO_SETTING)
+					.append(API_PROMPT_INFO_CONTENT)
+					.append(companyParam.getCompanyName())
+					.toString();
+			
+		}else if (companyParam.getAPIType().equals(APIType.EMAIL)) {
+			fullPrompt = new StringBuilder()
+					.append(API_PROMPT_EMAIL_SETTING)
+					.append(API_PROMPT_EMAIL_CONTENT)
+					.append(companyParam.getCompanyMeet())
+					.append(API_PROMPT_EMAIL_INFO)
+					.append(companyParam.getCompanyInfo())
+					.toString();
+			
+		}
 		
 		return fullPrompt;
 	}
 	
-    private String createRequestBody(String prompt) {
-    	
-        JSONObject json = new JSONObject();
-        json.put("model", OPENAI_API_GPT_MODEL);
-
-        JSONArray messages = new JSONArray();
-        JSONObject message = new JSONObject();
-        message.put("role", "user");
-        message.put("content", prompt);
-        messages.put(message);
-
-        json.put("messages", messages);
-
-        return json.toString();
-    }
-
-    //responseBody에서 gptAnswer 추출
-    private String parseResponse(String responseBody) {
-        JSONObject json = new JSONObject(responseBody);
-        JSONArray choices = json.getJSONArray("choices");
-        JSONObject message = choices.getJSONObject(0).getJSONObject("message");
-        return message.getString("content");
-    }
+    
 }
