@@ -18,6 +18,8 @@ public class APIController extends BasicController{
 	@RequestMapping("/info")
 	public String info(CompanyParam companyParam) throws Exception{
 		
+		logger.info("info, companyNAme = {}", companyParam.getCompanyName());
+		
 		companyParam.setAPIType(APIType.INFO);
 		
 		String response = gptApiService.getGPTResponse(companyParam);

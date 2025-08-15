@@ -14,7 +14,7 @@
  	</settings>
 
 	<mappers>
-		<mapper resource="mapper/mCompanySql.xml" />
+		<mapper resource="mapper/master/mCompanySql.xml" />
 	</mappers>
 
 </configuration>
