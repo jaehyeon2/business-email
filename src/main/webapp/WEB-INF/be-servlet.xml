@@ -54,4 +54,12 @@
 	<context:component-scan base-package="com.jaehyeon2.be" />
 
 
+	<mvc:interceptors>
+		<mvc:interceptor>
+ 			<mvc:mapping path="/be"/>
+			<mvc:mapping path="/be/**"/>
+			<bean class="com.jaehyeon2.be.interceptor.LoggingInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 </beans>

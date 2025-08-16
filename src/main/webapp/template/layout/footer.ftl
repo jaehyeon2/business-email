@@ -1,5 +1,1 @@
-<hr>
-
-<footer style="text-align: center;">
-	footer
-</footer>
+<script src="/static/js/common.js"></script>

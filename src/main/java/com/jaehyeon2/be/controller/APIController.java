@@ -2,7 +2,9 @@ package com.jaehyeon2.be.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jaehyeon2.be.beans.enums.APIType;
 import com.jaehyeon2.be.beans.param.CompanyParam;
@@ -16,7 +18,7 @@ public class APIController extends BasicController{
 	private GptApiService gptApiService;
 	
 	@RequestMapping("/info")
-	public String info(CompanyParam companyParam) throws Exception{
+	public @ResponseBody String info(@RequestBody CompanyParam companyParam) throws Exception{
 		
 		logger.info("info, companyNAme = {}", companyParam.getCompanyName());
 		
@@ -28,7 +30,7 @@ public class APIController extends BasicController{
 	}
 	
 	@RequestMapping("/email")
-	public String email(CompanyParam companyParam) throws Exception{
+	public @ResponseBody String email(@RequestBody CompanyParam companyParam) throws Exception{
 		
 		companyParam.setAPIType(APIType.EMAIL);
 		

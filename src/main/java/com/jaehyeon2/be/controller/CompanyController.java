@@ -3,6 +3,7 @@ package com.jaehyeon2.be.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,8 +17,8 @@ import com.jaehyeon2.be.beans.model.CompanyModel;
 import com.jaehyeon2.be.beans.param.CompanyParam;
 import com.jaehyeon2.be.service.CompanyService;
 
-@RestController
-@RequestMapping("/company")
+@Controller
+@RequestMapping("/be/company")
 public class CompanyController extends BasicController {
 
     @Autowired
@@ -40,21 +41,23 @@ public class CompanyController extends BasicController {
 
     // 목록 조회
     @RequestMapping(value = {"/index", "", "/"}, method = RequestMethod.GET)
-    public List<CompanyModel> getCompanyList(CompanyParam companyParam, ModelMap map) throws Exception {
+    public String index(CompanyParam companyParam, ModelMap map) throws Exception {
     	
     	BeModel model = new BeModel();
     	
     	List<CompanyModel> companyList = companyService.sltCompanyList(companyParam);
     	
+    	logger.info("companyList.size() = {}", companyList.size());
+    	
     	model.setCompanyList(companyList);
     	
     	map.addAttribute(MODEL, map);
     	
-        return companyService.sltCompanyList(companyParam);
+        return "apps/company/index";
     }
 
     // 등록
-    @RequestMapping("/addCompany")
+    @PostMapping(value = {"/addCompany"})
     public @ResponseBody BeModel addCompany(@RequestBody CompanyParam companyParam, ModelMap map) throws Exception {
         
     	BeModel model = new BeModel();

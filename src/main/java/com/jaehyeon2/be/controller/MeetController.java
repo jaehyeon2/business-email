@@ -15,7 +15,7 @@ public class MeetController {
 		
 		
 		
-		return "/apps/company/index";
+		return "/apps/meet/index";
 	}
 
 }

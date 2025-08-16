@@ -1,50 +1,41 @@
-function isEmpty(str) {
-    return (!str || 0 === str.length);
+// 특정 모달 열기
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = "block";
+    }
 }
 
-function validateField(inputTag, tagName) {
-	var isError = true;
-
-	if(inputTag.length < 1) {
-		alert("적어도 하나의 필드에 입력을 하셔야 합니다.");
-		return false;
-	}
-
-	for (i=0; i < inputTag.length; i++) {
-
-		if(inputTag[i].name == tagName) {
-			console.log("===> " + inputTag[i].name);
-			continue;
-		}
-
-	    if (isEmpty(inputTag[i].value)) {
-	    	// Only focus for the first tag field
-	    	if(isError) {
-	    		console.log("tag name in errors. name=" + inputTag[i].name);
-	    		inputTag[i].focus();
-	    		inputTag[i].scrollIntoView();
-	    	}
-	    	inputTag[i].style.border = "1px solid red";
-	        isError = false;
-	    } else {
-	    	inputTag[i].style.border = "";
-	    }
-	}
-
-	return isError;
+// 특정 모달 닫기
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = "none";
+    }
 }
 
-function validateForm(formId) {
-	var table = document.getElementById(formId);
+// 모달 영역 바깥 클릭 시 닫기
+window.onclick = function(event) {
+    const modals = document.getElementsByClassName("modal");
+    for (let i = 0; i < modals.length; i++) {
+        if (event.target === modals[i]) {
+            modals[i].style.display = "none";
+        }
+    }
+};
 
-	var inputTag = table.getElementsByTagName("input");
-	// noNo is excepted
-	if(!validateField(inputTag, "noNo")) {
-		return false;
-	}
-	//var textareaTag = table.getElementsByTagName("textarea");
-	//if(!validateField(textareaTag, "")) {
-	//	return false;
-	//}
-	return true;
+function alertAsync(message) {
+	
+	return new Promise(function(resolve) {
+		alert(message);
+		resolve();
+	});
+}
+
+function confirmAsync(message) {
+	
+	return new Promise(function(resolve) {
+		const result = confirm(message);
+			resolve(result);
+	});
 }

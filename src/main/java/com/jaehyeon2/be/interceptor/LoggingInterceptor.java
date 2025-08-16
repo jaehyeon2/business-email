@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 
-public class AuthInterceptor implements HandlerInterceptor{
+public class LoggingInterceptor implements HandlerInterceptor{
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -40,26 +40,6 @@ public class AuthInterceptor implements HandlerInterceptor{
 		logger.info("getServletPath >>> " + request.getServletPath());
 		logger.info("pathInfo >>> " + pathInfo);
 
-		// True to create new session
-//		HttpSession session = request.getSession();
-
-//		try {
-//			// Get userInfo from session
-//			UserModel user = (UserModel) session.getAttribute("user");
-//			if(user == null) {
-//				throw new LoginException();
-//			}
-//		} catch (LoginException | NullPointerException e) {
-//			// Clear cookie
-//			this.clearCookie(request, response);
-//			// Clear session
-//			session.invalidate();
-//			logger.warn("LoginException:session is clear.");
-//
-//			ModelAndView mv = new ModelAndView("redirect:/login");
-//			ModelAndViewDefiningException mvde = new ModelAndViewDefiningException(mv);
-//			throw mvde;
-//		}
 		return true;
 	}
 
