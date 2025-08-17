@@ -1,3 +1,7 @@
+body.modal-open {
+    overflow: hidden;
+}
+
 .modal {
 	position: fixed;
 	top: 0;
@@ -10,9 +14,9 @@
 
 .modal-content {
 	background: #fff;
-	margin: 10% auto;
+	margin: 2% auto;
 	padding: 20px;
-	width: 500px;
+	width: 90%;
 	border-radius: 8px;
 	position: relative;
 }
@@ -54,3 +58,50 @@
 	margin-left: 10px;
 	padding: 6px 12px;
 }
+
+/* 전체 리스트를 테이블처럼 */
+ul {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 각 행 */
+div > ul {
+  display: table-row;
+}
+
+/* 각 셀 */
+ul li {
+  display: table-cell;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* 헤더 스타일 */
+div > ul:first-child li {
+  font-weight: bold;
+  background-color: #f5f5f5;
+}
+
+/* 행 hover 효과 */
+div[onClick] ul:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+/* 모달 내 textarea 스타일 */
+textarea {
+    width: 100%;
+    height: 60vh;
+    padding: 8px;
+    box-sizing: border-box;
+    font-family: monospace;
+    resize: vertical;
+}
+

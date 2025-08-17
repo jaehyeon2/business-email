@@ -19,9 +19,10 @@
 			</ul>
 		</div>
 		<#list model.companyList as company>
-		<div onClick="location.href='/tb/company/detail?copmanyNo=${company.companyNo?if_exists}'">
+		<div onClick="location.href='/be/company/detail?companyNo=${company.companyNo?if_exists}'">
 			<ul>
 				<li>${company.companyNo?if_exists}</li>
+				<li>${company.companyName?if_exists}</li>
 				<li><#if company.insertTime?exists>${company.insertTime?string('yyyy.MM.dd | HH:mm:ss')}</#if></li>
 				<li><#if company.updateTime?exists>${company.updateTime?string('yyyy.MM.dd | HH:mm:ss')}</#if></li>
 			</ul>

@@ -3,6 +3,7 @@ function openModal(id) {
     const modal = document.getElementById(id);
     if (modal) {
         modal.style.display = "block";
+        document.body.classList.add('modal-open');
     }
 }
 
@@ -11,6 +12,7 @@ function closeModal(id) {
     const modal = document.getElementById(id);
     if (modal) {
         modal.style.display = "none";
+        document.body.classList.remove('modal-open');
     }
 }
 
@@ -20,6 +22,7 @@ window.onclick = function(event) {
     for (let i = 0; i < modals.length; i++) {
         if (event.target === modals[i]) {
             modals[i].style.display = "none";
+            document.body.classList.remove('modal-open');
         }
     }
 };
