@@ -2,11 +2,14 @@ package com.jaehyeon2.be.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jaehyeon2.be.beans.enums.APIType;
+import com.jaehyeon2.be.beans.model.BeModel;
+import com.jaehyeon2.be.beans.model.GptResponseModel;
 import com.jaehyeon2.be.beans.param.CompanyParam;
 import com.jaehyeon2.be.service.GptApiService;
 
@@ -17,26 +20,34 @@ public class APIController extends BasicController{
 	@Autowired
 	private GptApiService gptApiService;
 	
-	@RequestMapping("/info")
-	public @ResponseBody String info(@RequestBody CompanyParam companyParam) throws Exception{
+	@PostMapping(value = {"/info"})
+	public @ResponseBody BeModel info(@RequestBody CompanyParam companyParam) throws Exception{
 		
-		logger.info("info, companyNAme = {}", companyParam.getCompanyName());
+		BeModel model = new BeModel();
+		
+		logger.info("info, companyName = {}", companyParam.getCompanyName());
 		
 		companyParam.setAPIType(APIType.INFO);
 		
-		String response = gptApiService.getGPTResponse(companyParam);
+		GptResponseModel gptResponse = gptApiService.getGPTResponse(companyParam);
 		
-		return response;
+		model.setGptResponse(gptResponse);
+		
+		return model;
 	}
 	
 	@RequestMapping("/email")
-	public @ResponseBody String email(@RequestBody CompanyParam companyParam) throws Exception{
+	public @ResponseBody BeModel email(@RequestBody CompanyParam companyParam) throws Exception{
+		
+		BeModel model = new BeModel();
 		
 		companyParam.setAPIType(APIType.EMAIL);
 		
-		String response = gptApiService.getGPTResponse(companyParam);
+		GptResponseModel gptResponse = gptApiService.getGPTResponse(companyParam);
 		
-		return response;
+		model.setGptResponse(gptResponse);
+		
+		return model;
 		
 	}
 	

@@ -9,6 +9,7 @@
 			company_name,
 			company_info,
 			company_meet,
+			company_email_content,
 			company_status,
 			company_delete,
 			insert_time,
@@ -17,6 +18,7 @@
 			#{companyName},
 			#{companyInfo},
 			#{companyMeet},
+			#{companyEmailContent},
 			#{companyStatus},
 			'0',
 			NOW(),
@@ -36,6 +38,9 @@
 			</if>
 			<if test="companyMeet != null and companyMeet != ''">
 			company_meet = #{companyMeet},
+			</if>
+			<if test="companyEmailContent != null and companyEmailContent != ''">
+			company_email_content = #{companyEmailContent},
 			</if>
 			<if test="companyStatus != null and companyStatus != ''">
 			company_status = #{companyStatus},

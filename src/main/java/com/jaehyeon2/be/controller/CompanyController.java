@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.jaehyeon2.be.beans.model.BeModel;
 import com.jaehyeon2.be.beans.model.CompanyModel;
@@ -26,7 +25,7 @@ public class CompanyController extends BasicController {
 
     // 단건 조회
     @RequestMapping(value = {"/detail"}, method = RequestMethod.GET)
-    public CompanyModel detail(CompanyParam companyParam, ModelMap map) throws Exception {
+    public String detail(CompanyParam companyParam, ModelMap map) throws Exception {
     	
     	BeModel model = new BeModel();
     	
@@ -36,7 +35,7 @@ public class CompanyController extends BasicController {
     	
     	map.addAttribute(MODEL, model);
     	
-        return companyService.sltCompany(companyParam);
+        return "apps/company/detail";
     }
 
     // 목록 조회
@@ -51,7 +50,7 @@ public class CompanyController extends BasicController {
     	
     	model.setCompanyList(companyList);
     	
-    	map.addAttribute(MODEL, map);
+    	map.addAttribute(MODEL, model);
     	
         return "apps/company/index";
     }
@@ -71,7 +70,7 @@ public class CompanyController extends BasicController {
 
     // 수정
     @RequestMapping("/updateCompany")
-    public @ResponseBody BeModel updateCompany(CompanyParam companyParam, ModelMap map) throws Exception {
+    public @ResponseBody BeModel updateCompany(@RequestBody CompanyParam companyParam, ModelMap map) throws Exception {
     	BeModel model = new BeModel();
     	
     	boolean responseResult = companyService.udtCompany(companyParam);
@@ -83,7 +82,7 @@ public class CompanyController extends BasicController {
 
     // 삭제
     @RequestMapping("/deleteCompany")
-    public @ResponseBody BeModel deleteCompany(CompanyParam companyParam, ModelMap map) throws Exception {
+    public @ResponseBody BeModel deleteCompany(@RequestBody CompanyParam companyParam, ModelMap map) throws Exception {
     	BeModel model = new BeModel();
     	
     	boolean responseResult = companyService.dltCompany(companyParam);
