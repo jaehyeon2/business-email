@@ -6,6 +6,7 @@ public class CompanyModel extends BasicModel{
 	private String companyName;
 	private String companyInfo;
 	private String companyMeet;
+	private String companyEmailContent;
 	
 	public String getCompanyNo() {
 		return companyNo;
@@ -30,6 +31,12 @@ public class CompanyModel extends BasicModel{
 	}
 	public void setCompanyMeet(String companyMeet) {
 		this.companyMeet = companyMeet;
+	}
+	public String getCompanyEmailContent() {
+		return companyEmailContent;
+	}
+	public void setCompanyEmailContent(String companyEmailContent) {
+		this.companyEmailContent = companyEmailContent;
 	}
 
 }

@@ -11,6 +11,8 @@ public class BeModel {
 	private boolean responseResult;
 	private String responseMessage;
 	
+	private GptResponseModel gptResponse;
+	
 	public CompanyModel getCompany() {
 		return company;
 	}
@@ -40,5 +42,11 @@ public class BeModel {
 	}
 	public void setResponseMessage(String responseMessage) {
 		this.responseMessage = responseMessage;
+	}
+	public GptResponseModel getGptResponse() {
+		return gptResponse;
+	}
+	public void setGptResponse(GptResponseModel gptResponse) {
+		this.gptResponse = gptResponse;
 	}
 }
