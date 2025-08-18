@@ -25,9 +25,21 @@ public class APIController extends BasicController{
 		
 		BeModel model = new BeModel();
 		
-		logger.info("info, companyName = {}", companyParam.getCompanyName());
-		
 		companyParam.setAPIType(APIType.INFO);
+		
+		GptResponseModel gptResponse = gptApiService.getGPTResponse(companyParam);
+		
+		model.setGptResponse(gptResponse);
+		
+		return model;
+	}
+	
+	@PostMapping(value = {"/summary"})
+	public @ResponseBody BeModel summary(@RequestBody CompanyParam companyParam) throws Exception{
+		
+		BeModel model = new BeModel();
+		
+		companyParam.setAPIType(APIType.SUMMARY);
 		
 		GptResponseModel gptResponse = gptApiService.getGPTResponse(companyParam);
 		
