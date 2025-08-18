@@ -74,11 +74,11 @@ function getCompanyInfo(){
     request.send(param);
 }
 
-function getCompanyEmailContent(){
+function getCompanySummary(){
 	const companyNo = document.getElementById('companyNo').value.trim();
 	const companyInfo = document.getElementById('companyInfo').value.trim();
 	const companyMeet = document.getElementById('companyMeet').value.trim();
-	const companyEmailContentTextarea = document.getElementById('companyEmailContent');
+	const companySummaryTextarea = document.getElementById('companySummary');
 	
 	if (!companyNo) {
         alertAsync('회사 정보가 존재하지 않습니다.');
@@ -100,6 +100,60 @@ function getCompanyEmailContent(){
 		companyInfo: companyInfo,
 		companyMeet: companyMeet
     });
+    const url = "/api/summary";
+
+    const request = new XMLHttpRequest();
+
+    request.onload = function() {
+        if (request.status === 200) {
+            const response = JSON.parse(request.response);
+			console.log(response);
+            if ((response.gptResponse.result === true)) {
+               companySummaryTextarea.value = response.gptResponse.content;
+            } else {
+                alertAsync('이메일 내용 생성에 실패했습니다.');
+            }
+        } else {
+            alertAsync('서버 오류가 발생했습니다.');
+        }
+    };
+
+    request.onerror = function() {
+        alertAsync('요청 중 오류가 발생했습니다.');
+    };
+
+    request.open("POST", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(param);
+}
+
+function getCompanyEmail(){
+	const companyNo = document.getElementById('companyNo').value.trim();
+	const companySummary = document.getElementById('companySummary').value.trim();
+	const companyStatus = document.getElementById('companyStatus').value.trim();
+	const companyEmailTextarea = document.getElementById('companyEmail');
+	
+	if (!companyNo) {
+        alertAsync('회사 정보가 존재하지 않습니다.');
+        return;
+    }
+    
+    if (!companyStatus){
+		alertAsync('담당자 세부 정보가 존재하지 않습니다.');
+        return;
+	}
+    
+    if (!companySummary){
+		alertAsync('요약 정보가 존재하지 않습니다.');
+        return;
+	}
+	
+
+    const param = JSON.stringify({ 
+		companyNo: companyNo,
+		companyStatus: companyStatus,
+		companySummary: companySummary
+    });
     const url = "/api/email";
 
     const request = new XMLHttpRequest();
@@ -109,7 +163,7 @@ function getCompanyEmailContent(){
             const response = JSON.parse(request.response);
 			console.log(response);
             if ((response.gptResponse.result === true)) {
-               companyEmailContentTextarea.value = response.gptResponse.content;
+               companyEmailTextarea.value = response.gptResponse.content;
             } else {
                 alertAsync('이메일 내용 생성에 실패했습니다.');
             }
@@ -215,9 +269,9 @@ function udtCompanyMeet() {
     request.send(param);
 }
 
-function udtCompanyEmailContent() {
+function udtCompanySummary() {
     const companyNo = document.getElementById('companyNo').value.trim();
-	const companyEmailContent = document.getElementById('companyEmailContent').value.trim();
+	const companySummary = document.getElementById('companySummary').value.trim();
 	
     if (!companyNo) {
         alertAsync('회사 정보가 존재하지 않습니다.');
@@ -226,7 +280,51 @@ function udtCompanyEmailContent() {
 
     const param = JSON.stringify({
 		 companyNo : companyNo,
-		 companyEmailContent : companyEmailContent
+		 companySummary : companySummary
+	});
+	
+    const url = "/be/company/updateCompany";
+
+    const request = new XMLHttpRequest();
+
+    request.onload = function() {
+        if (request.status === 200) {
+            const response = JSON.parse(request.response);
+
+            if ((response.responseResult === true)) {
+                alertAsync('요약 내용 정보 등록에 성공했습니다.')
+                    .then(function() {
+                        location.reload();
+                    });
+            } else {
+                alertAsync('요약 내용 정보 등록에 실패했습니다.');
+            }
+        } else {
+            alertAsync('서버 오류가 발생했습니다.');
+        }
+    };
+
+    request.onerror = function() {
+        alertAsync('요청 중 오류가 발생했습니다.');
+    };
+
+    request.open("POST", url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(param);
+}
+
+function udtCompanyEmail() {
+    const companyNo = document.getElementById('companyNo').value.trim();
+	const companyEmail = document.getElementById('companyEmail').value.trim();
+	
+    if (!companyNo) {
+        alertAsync('회사 정보가 존재하지 않습니다.');
+        return;
+    }
+
+    const param = JSON.stringify({
+		 companyNo : companyNo,
+		 companyEmail : companyEmail
 	});
 	
     const url = "/be/company/updateCompany";

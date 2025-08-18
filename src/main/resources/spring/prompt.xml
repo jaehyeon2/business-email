@@ -17,16 +17,19 @@
 		<constructor-arg value="${prompt.info.content}"/>
 	</bean>
 	
+	<bean id="API_PROMPT_SUMMARY_SETTING" class="java.lang.String" scope="singleton">
+		<constructor-arg value="${prompt.summary.setting}"/>
+	</bean>
+	
+	<bean id="API_PROMPT_SUMMARY_CONTENT" class="java.lang.String" scope="singleton">
+		<constructor-arg value="${prompt.summary.content}"/>
+	</bean>
+		
+	<bean id="API_PROMPT_SUMMARY_INFO" class="java.lang.String" scope="singleton">
+		<constructor-arg value="${prompt.summary.info}"/>
+	</bean>
+	
 	<bean id="API_PROMPT_EMAIL_SETTING" class="java.lang.String" scope="singleton">
 		<constructor-arg value="${prompt.email.setting}"/>
 	</bean>
-	
-	<bean id="API_PROMPT_EMAIL_CONTENT" class="java.lang.String" scope="singleton">
-		<constructor-arg value="${prompt.email.content}"/>
-	</bean>
-		
-	<bean id="API_PROMPT_EMAIL_INFO" class="java.lang.String" scope="singleton">
-		<constructor-arg value="${prompt.email.info}"/>
-	</bean>
-
 </beans>
