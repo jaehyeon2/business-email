@@ -24,7 +24,8 @@ public class CompanyServiceImpl extends BasicService implements CompanyService {
 			map.put("companyName", companyParam.getCompanyName());
 			map.put("companyInfo", companyParam.getCompanyInfo());
 			map.put("companyMeet", companyParam.getCompanyMeet());
-			map.put("companyEmailContent", companyParam.getCompanyEmailContent());
+			map.put("companySummary", companyParam.getCompanySummary());
+			map.put("companyEmail", companyParam.getCompanyEmail());
 			map.put("companyStatus", companyParam.getCompanyStatus());
 
 			intResult = mDbDao.getMapper(MCompanyDao.class).istCompany(map);
@@ -50,7 +51,8 @@ public class CompanyServiceImpl extends BasicService implements CompanyService {
 			map.put("companyName", companyParam.getCompanyName());
 			map.put("companyInfo", companyParam.getCompanyInfo());
 			map.put("companyMeet", companyParam.getCompanyMeet());
-			map.put("companyEmailContent", companyParam.getCompanyEmailContent());
+			map.put("companySummary", companyParam.getCompanySummary());
+			map.put("companyEmail", companyParam.getCompanyEmail());
 			map.put("companyStatus", companyParam.getCompanyStatus());
 
 			intResult = mDbDao.getMapper(MCompanyDao.class).udtCompany(map);

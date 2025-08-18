@@ -6,7 +6,9 @@ public class CompanyModel extends BasicModel{
 	private String companyName;
 	private String companyInfo;
 	private String companyMeet;
-	private String companyEmailContent;
+	private String companySummary;
+	private String companyEmail;
+	private String companyStatus;
 	
 	public String getCompanyNo() {
 		return companyNo;
@@ -32,11 +34,23 @@ public class CompanyModel extends BasicModel{
 	public void setCompanyMeet(String companyMeet) {
 		this.companyMeet = companyMeet;
 	}
-	public String getCompanyEmailContent() {
-		return companyEmailContent;
+	public String getCompanySummary() {
+		return companySummary;
 	}
-	public void setCompanyEmailContent(String companyEmailContent) {
-		this.companyEmailContent = companyEmailContent;
+	public void setCompanySummary(String companySummary) {
+		this.companySummary = companySummary;
+	}
+	public String getCompanyEmail() {
+		return companyEmail;
+	}
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
+	}
+	public String getCompanyStatus() {
+		return companyStatus;
+	}
+	public void setCompanyStatus(String companyStatus) {
+		this.companyStatus = companyStatus;
 	}
 
 }

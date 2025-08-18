@@ -39,14 +39,17 @@ public class GptApiServiceImpl implements GptApiService{
 	private String API_PROMPT_INFO_CONTENT;
 	
 	@Autowired
+	private String API_PROMPT_SUMMARY_SETTING;
+	
+	@Autowired
+	private String API_PROMPT_SUMMARY_CONTENT;
+	
+	@Autowired
+	private String API_PROMPT_SUMMARY_INFO;
+	
+	@Autowired
 	private String API_PROMPT_EMAIL_SETTING;
-	
-	@Autowired
-	private String API_PROMPT_EMAIL_CONTENT;
-	
-	@Autowired
-	private String API_PROMPT_EMAIL_INFO;
-	
+
 //	/v1/responses
 //	private String createRequestBody(String prompt) {
 //    	
@@ -184,15 +187,21 @@ public class GptApiServiceImpl implements GptApiService{
 					.append(companyParam.getCompanyName())
 					.toString();
 			
-		}else if (companyParam.getAPIType().equals(APIType.EMAIL)) {
+		}else if (companyParam.getAPIType().equals(APIType.SUMMARY)) {
 			fullPrompt = new StringBuilder()
-					.append(API_PROMPT_EMAIL_SETTING)
-					.append(API_PROMPT_EMAIL_CONTENT)
+					.append(API_PROMPT_SUMMARY_SETTING)
+					.append(API_PROMPT_SUMMARY_CONTENT)
 					.append(companyParam.getCompanyMeet())
-					.append(API_PROMPT_EMAIL_INFO)
+					.append(API_PROMPT_SUMMARY_INFO)
 					.append(companyParam.getCompanyInfo())
 					.toString();
 			
+		}else if (companyParam.getAPIType().equals(APIType.EMAIL)) {
+			fullPrompt = new StringBuilder()
+					.append(companyParam.getCompanySummary())
+					.append(API_PROMPT_EMAIL_SETTING)
+					.append(companyParam.getCompanyStatus())
+					.toString();
 		}
 		
 		return fullPrompt;

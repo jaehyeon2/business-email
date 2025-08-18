@@ -8,7 +8,8 @@ public class CompanyParam {
 	private String companyName;
 	private String companyInfo;
 	private String companyMeet;
-	private String companyEmailContent;
+	private String companySummary;
+	private String companyEmail;
 	private String companyStatus;
 	
 	private APIType APIType;
@@ -37,11 +38,17 @@ public class CompanyParam {
 	public void setCompanyMeet(String companyMeet) {
 		this.companyMeet = companyMeet;
 	}
-	public String getCompanyEmailContent() {
-		return companyEmailContent;
+	public String getCompanySummary() {
+		return companySummary;
 	}
-	public void setCompanyEmailContent(String companyEmailContent) {
-		this.companyEmailContent = companyEmailContent;
+	public void setCompanySummary(String companySummary) {
+		this.companySummary = companySummary;
+	}
+	public String getCompanyEmail() {
+		return companyEmail;
+	}
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
 	}
 	public String getCompanyStatus() {
 		return companyStatus;

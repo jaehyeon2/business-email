@@ -9,7 +9,8 @@
 			company_name,
 			company_info,
 			company_meet,
-			company_email_content,
+			company_summary,
+			company_email,
 			company_status,
 			company_delete,
 			insert_time,
@@ -18,7 +19,8 @@
 			#{companyName},
 			#{companyInfo},
 			#{companyMeet},
-			#{companyEmailContent},
+			#{companySummary},
+			#{companyEmail},
 			#{companyStatus},
 			'0',
 			NOW(),
@@ -39,8 +41,11 @@
 			<if test="companyMeet != null and companyMeet != ''">
 			company_meet = #{companyMeet},
 			</if>
-			<if test="companyEmailContent != null and companyEmailContent != ''">
-			company_email_content = #{companyEmailContent},
+			<if test="companySummary != null and companySummary != ''">
+			company_summary = #{companySummary},
+			</if>
+			<if test="companyEmail != null and companyEmail != ''">
+			company_email = #{companyEmail},
 			</if>
 			<if test="companyStatus != null and companyStatus != ''">
 			company_status = #{companyStatus},
